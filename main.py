@@ -11,3 +11,5 @@ async def funcaoteste():
     return {
         "teste": True, "num_aleatorio": random.randint(a:0, b:1000)
             }
+
+# mod1

@@ -1,0 +1,28 @@
+ name: Continuous Integration
+ on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+ 
+ jobs:
+    build:
+    lint:
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          linter: [flake8, pylint, ruff, mypy, pytype, pyright, fixit, pyre]
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - uses: advanced-security/python-lint-code-scanning-action@v1
+          with:
+            linter: ${{ matrix.linter }}
+
+
+- name: Python Lint Code Scanning Action
+  uses: advanced-security/python-lint-code-scanning-action@v1.1.2
+ with:
+  linter: pylint
+

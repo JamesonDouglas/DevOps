@@ -24,6 +24,9 @@ jobs:
             exit 1
           fi
 
+      - name: List files in the workspace
+        run: ls -R
+
       - name: Install dependencies
         run: pip install -r requirements.txt
 

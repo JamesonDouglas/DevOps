@@ -13,9 +13,6 @@ jobs:
         with:
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Debug GitHub Context
-        run: echo "${{ toJson(github) }}"
-
       - name: Simulando Continuous Delivery
         uses: actions/upload-artifact@v4
         with:
@@ -23,3 +20,4 @@ jobs:
           path: |
             `**.py`
             `README.md`
+            

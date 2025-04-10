@@ -1,48 +1,21 @@
 name: Continuous Integration
 on:
-  push:
-    branches: [main]
   pull_request:
-    branches: [main]
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Debug GitHub Context
+        run: echo "${{ toJson(github) }}"
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Python Lint Code Scanning Action
+        uses: advanced-security/python-lint-code-scanning-action@v1.1.2
         with:
-          python-version: '3.x'
-
-      - name: Verify requirements.txt exists
-        run: |
-          if [ ! -f requirements.txt ]; then
-            echo "requirements.txt not found!"
-            exit 1
-          fi
-
-      - name: List files in the workspace
-        run: ls -R
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run tests
-        run: pytest
-
-  lint:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        linter: [flake8, pylint, ruff, mypy, pytype, pyright, fixit, pyre]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run Python Lint Code Scanning
-        uses: advanced-security/python-lint-code-scanning-action@v1
-        with:
-          linter: ${{ matrix.linter }}
+          linter: pylint

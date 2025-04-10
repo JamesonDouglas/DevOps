@@ -13,11 +13,10 @@ jobs:
         with:
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Simulando Continuous Delivery
-        uses: actions/upload-artifact@v4
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: projetozipado.zip
           path: |
             `**.py`
             `README.md`
-            

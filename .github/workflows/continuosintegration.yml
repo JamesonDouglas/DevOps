@@ -14,7 +14,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
       - name: Debug GitHub Context
         run: echo "${{ toJson(github) }}"
 
@@ -22,3 +21,13 @@ jobs:
         uses: advanced-security/python-lint-code-scanning-action@v1.1.2
         with:
           linter: pylint
+
+  discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord Notification
+        uses: Sniddl/discord-commits@v1.6
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          template: "avatar-with-link"
+          include-extras: true
